@@ -1,1 +1,1 @@
-STM32 QEI Library using external interrupt and HAL library based on mbed-QEI.
+STM32 QEI Library using external interrupt (rising & falling mode) and HAL library based on mbed-QEI.
