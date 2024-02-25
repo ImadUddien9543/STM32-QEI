@@ -30,17 +30,14 @@ X4_QEI *Init_QEI(GPIO_TypeDef *PortA, GPIO_TypeDef *PortB,
 	self->PinB = PinB;
 	self->PPR = PPR;
 
-	self->pulse = 0;
-	self->PulseA = 0;
-	self->PulseB = 0;
-	self->curr = 0;
-	self->prev = 0;
-
-	self->GetPulse = EncodeQEI;
-	self->ResetQEI = ResetQEI;
-
+	self->pulse = self->PulseA = self->PulseB = 0;
+	self->curr = self->prev = 0;
+	self->start_t = self->prev_t = self->dt = 0;
 	self->RPM = self->RAD_S = self->MTR_S = 0;
 	self->RAD = self->DEG = self->METER = 0;
+	
+	self->GetPulse = EncodeQEI;
+	self->ResetQEI = ResetQEI;
 
 	if(Vel == QEI_RAD_S) self->GetROT_VEL = GetRAD_S;
 	else self->GetROT_VEL = GetRPM;
