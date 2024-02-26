@@ -18,9 +18,7 @@ static void GetDEG(X4_QEI *self);
 static void GetRAD(X4_QEI *self);
 static void GetMTR(X4_QEI *self, float r);
 
-X4_QEI *Init_QEI(GPIO_TypeDef *PortA, GPIO_TypeDef *PortB,
-		uint16_t PinA, uint16_t PinB, int32_t PPR,
-		X4_QEI_ROT Vel, X4_QEI_ANG Ang){
+X4_QEI *Init_QEI(GPIO_TypeDef *PortA, GPIO_TypeDef *PortB, uint16_t PinA, uint16_t PinB, int32_t PPR){
 	X4_QEI *self;
 	self = (X4_QEI*)malloc(sizeof(X4_QEI));
 
@@ -30,23 +28,26 @@ X4_QEI *Init_QEI(GPIO_TypeDef *PortA, GPIO_TypeDef *PortB,
 	self->PinB = PinB;
 	self->PPR = PPR;
 
-	self->pulse = self->PulseA = self->PulseB = 0;
-	self->curr = self->prev = 0;
-	self->start_t = self->prev_t = self->dt = 0;
-	self->RPM = self->RAD_S = self->MTR_S = 0;
-	self->RAD = self->DEG = self->METER = 0;
-	
+	self->pulse = 0;
+	self->PulseA = 0;
+	self->PulseB = 0;
+	self->curr = 0;
+	self->prev = 0;
+
 	self->GetPulse = EncodeQEI;
 	self->ResetQEI = ResetQEI;
 
-	if(Vel == QEI_RAD_S) self->GetROT_VEL = GetRAD_S;
-	else self->GetROT_VEL = GetRPM;
+	self->RPM = self->RAD_S = self->MTR_S = 0;
+	self->RAD = self->DEG = self->METER = 0;
 
-	if(Ang == QEI_RAD) self->GetANGLE = GetRAD;
-	else self->GetANGLE = GetDEG;
+	self->GetRAD_S = GetRAD_S;
+	self->GetRPM = GetRPM;
+	self->GetMTR_S = GetMTR_S;
 
-	self->GetLIN_VEL = GetMTR_S;
-	self->GetDIST = GetMTR;
+	self->GetRAD = GetRAD;
+	self->GetDEG = GetDEG;
+	self->GetMTR = GetMTR;
+
 	return self;
 }
 
