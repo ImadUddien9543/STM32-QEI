@@ -18,15 +18,6 @@
 #define QEI_CURR_MSK	(0x2)
 #define QEI_INVALID		(0x3)
 
-typedef enum _X4_QEI_VEL_MODE_{
-	QEI_RPM,
-	QEI_RAD_S
-}X4_QEI_ROT;
-
-typedef enum _X4_QEI_DIST_MODE_{
-	QEI_RAD,
-	QEI_DEG
-}X4_QEI_ANG;
 
 typedef struct X4_QEI_t{
 	int16_t PulseA, PulseB;
@@ -39,16 +30,18 @@ typedef struct X4_QEI_t{
 	float RPM, RAD_S, MTR_S;
 	float RAD, DEG, METER;
 
-	void(*GetROT_VEL)(struct X4_QEI_t*, uint32_t);
-	void(*GetLIN_VEL)(struct X4_QEI_t*, uint32_t, float);
-	void(*GetANGLE)(struct X4_QEI_t*);
-	void(*GetDIST)(struct X4_QEI_t*, float);
+	void(*GetRPM)(struct X4_QEI_t*, uint32_t);
+	void(*GetRAD_S)(struct X4_QEI_t*, uint32_t);
+	void(*GetMTR_S)(struct X4_QEI_t*, uint32_t, float);
+
+	void(*GetDEG)(struct X4_QEI_t*);
+	void(*GetRAD)(struct X4_QEI_t*);
+	void(*GetMTR)(struct X4_QEI_t*, float);
+
 	void(*GetPulse)(struct X4_QEI_t*);
 	void(*ResetQEI)(struct X4_QEI_t*);
 }X4_QEI;
 
-extern X4_QEI *Init_QEI(GPIO_TypeDef *PortA, GPIO_TypeDef *PortB,
-		uint16_t PinA, uint16_t PinB, int32_t PPR,
-		X4_QEI_ROT Vel, X4_QEI_ANG Ang);
+extern X4_QEI *Init_QEI(GPIO_TypeDef *PortA, GPIO_TypeDef *PortB, uint16_t PinA, uint16_t PinB, int32_t PPR);
 
 #endif /* INC_QEI_X4_H_ */
