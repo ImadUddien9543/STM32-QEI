@@ -43,7 +43,7 @@ int main(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if(Encoder1->PinA || Encoder1->PinB) Encoder1->GetPulse(Encoder1);
+	if((GPIO_Pin == Encoder1->PinA) || (GPIO_Pin == Encoder1->PinB)) Encoder1->GetPulse(Encoder1);
 	else __NOP();
 }
 /* USER CODE END 4 */
