@@ -53,8 +53,8 @@ X4_QEI *Init_QEI(GPIO_TypeDef *PortA, GPIO_TypeDef *PortB, uint16_t PinA, uint16
 
 static void EncodeQEI(X4_QEI *self){
 	int direction = 0; //1 = counter-clockwise, else clockwise
-	self->PulseA = (int16_t)HAL_GPIO_ReadPin(self->PortA, self->PinA);
-	self->PulseB = (int16_t)HAL_GPIO_ReadPin(self->PortB, self->PinB);
+	self->PulseA = (uint32_t)((self->PortA->IDR & self->PinA) == self->PinA);
+	self->PulseB = (uint32_t)((self->PortB->IDR & self->PinB) == self->PinB);
 
 	self->curr = (self->PulseA << 1) | (self->PulseB);
 
@@ -110,4 +110,3 @@ static void GetRAD(X4_QEI *self){
 static void GetMTR(X4_QEI *self, float r){
 	self->METER = (self->pulse * M_TWOPI * r) / (4.0f * self->PPR);
 }
-
