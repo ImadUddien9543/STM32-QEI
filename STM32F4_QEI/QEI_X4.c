@@ -102,11 +102,11 @@ static void GetMTR_S(X4_QEI *self, uint32_t sample_t, float r){
 }
 
 static void GetDEG(X4_QEI *self){
-	self->DEG = (self->pulse * 360.0f) / (4.0f * self->PPR);
+	self->DEG = (self->pulse * 180.0f) / (4.0f * self->PPR);
 }
 static void GetRAD(X4_QEI *self){
-	self->RAD = (self->pulse * M_TWOPI) / (4.0f * self->PPR);
+	self->RAD = (self->pulse * M_PI) / (4.0f * self->PPR);
 }
 static void GetMTR(X4_QEI *self, float r){
-	self->METER = (self->pulse * M_TWOPI * r) / (4.0f * self->PPR);
+	self->METER = (self->pulse * M_PI * r * 2.0f) / (4.0f * self->PPR);
 }
