@@ -1,4 +1,4 @@
-STM32 QEI Library using external interrupt based on mbed-QEI for STM32CubeIDE users.
+STM32 QEI Library using EXTI based on mbed-QEI for STM32CubeIDE users.
 Below is an example of GPIO Pin configuration for ioc file:
 Encoder Pin | X4 Encoding | X2 Encoding
 --- | --- | ---
