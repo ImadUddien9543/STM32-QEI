@@ -1,16 +1,6 @@
-STM32 QEI Library using external interrupt and HAL library based on mbed-QEI.
-This library only support X4 encoding
-set 
-```
-External Interrupt Mode with Rising/Falling edge trigger detection
-```
-in ioc configuration.
-
-or set manually in 
-```
-MX_GPIO_Init(void){
-...
-GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
-...
-}
-```
+STM32 QEI Library using external interrupt based on mbed-QEI for STM32CubeIDE users.
+Below is an example of GPIO Pin configuration for ioc file:
+Encoder Pin | X4 Encoding | X2 Encoding
+--- | --- | ---
+**CH_A** | `EXTI (Rising-Falling) with Pull-Up` | `EXTI (Rising-Falling) with Pull-Up`
+**CH_B** | `EXTI (Rising-Falling) with Pull-Up` | `Input Mode / Polling with Pull-Up`
