@@ -1,5 +1,5 @@
 /*
- * QEI_X4.h
+ * QEI.h
  *
  *  Created on: Feb 24, 2024
  *      Author: Imaduddien
